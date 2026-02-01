@@ -37,50 +37,48 @@ button {
   cursor: pointer;
 }
 
-/* BUTTON COLORS */
 #yes { background: #ff4d6d; color: white; }
 #no { background: #444; color: white; position: absolute; }
 #musicBtn { background: white; color: #ff4d6d; margin-bottom: 20px; }
 
-/* PAGE BACKGROUNDS */
+/* PAGE STYLING */
 .page {
-  height: 100vh;
   width: 100%;
+  height: 100vh;
   display: none;
   position: relative;
+  overflow: hidden;
 }
 
-/* PAGE 1 */
-#page1 { background: linear-gradient(135deg, #ff758c, #ff7eb3); display: flex; justify-content: center; align-items: center; }
+/* Page 1 */
+#page1 { display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #ff758c, #ff7eb3); }
 
-/* PAGE 2 */
-#page2 { background: linear-gradient(135deg, #ff758c, #ff7eb3); display: flex; justify-content: center; align-items: flex-start; flex-direction: column; }
+/* Page 2: Meme + YES text */
+#page2 { display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #ff758c, #ff7eb3); }
 
-/* PAGE 3 */
-#page3 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+/* Page 3: Husky flowers */
+#page3 { display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
 
-/* PAGE 4 */
-#page4 { background: radial-gradient(circle at bottom, #000 0%, #111 80%); overflow: hidden; display: block; position: relative; }
+/* Page 4: Lanterns */
+#page4 { display: block; background: radial-gradient(circle at bottom, #000 0%, #111 80%); }
 
-/* MEME IMAGE */
+/* Meme image */
 .meme {
   width: 400px;
   max-width: 90vw;
-  margin: 20px auto 0 auto;
-  display: block;
+  margin-bottom: 20px;
   z-index: 5;
 }
 
-/* HUSKY IMAGE */
+/* Husky image */
 .husky {
   width: 250px;
   max-width: 80vw;
-  margin-top: 20px;
   border-radius: 20px;
-  z-index: 5;
+  margin-top: 20px;
 }
 
-/* LANTERN PAGE */
+/* Lanterns */
 .lantern {
   position: absolute;
   width: 30px;
@@ -97,6 +95,7 @@ button {
   to { transform: translateY(-130vh) scale(1.2); opacity: 0; }
 }
 
+/* Boat */
 .boat {
   position: absolute;
   bottom: 20%;
@@ -107,7 +106,7 @@ button {
   filter: brightness(1.2);
 }
 
-/* WATER REFLECTION CONTAINER */
+/* Water reflection container */
 #water {
   position: absolute;
   bottom: 0;
@@ -117,7 +116,7 @@ button {
   overflow: hidden;
 }
 
-/* REFLECTION ANIMATION */
+/* Lantern reflection animation */
 .reflection {
   transform: scaleY(-1);
   opacity: 0.3;
@@ -137,19 +136,10 @@ button {
   <source src="https://cdn.pixabay.com/download/audio/2023/02/28/audio_6c6a5f19e0.mp3" type="audio/mp3">
 </audio>
 
-<!-- PAGE 1: YES/NO -->
+<!-- PAGE 1: Proposal -->
 <div id="page1" class="page">
   <div class="card">
-    <h1>Will you be my Valentine? 💖</h1>
-    <button id="yes" onclick="gotoMemePage()">YES 💕</button>
-    <button id="no" onmouseover="moveNo()">No 😢</button>
-  </div>
-</div>
-
-<!-- PAGE 2: MEME + WRITING -->
-<div id="page2" class="page">
-  <img class="meme" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemxpZGtiejNmYXl2N3ZidDlha2JzYWNyeG9wam44bjAxbDlqNG9qZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rjkJD1v80CjYs/giphy.gif">
-  <div class="card" style="top: auto; position: relative;">
+    <button id="musicBtn" onclick="startMusic()">Tap to start music ❤️</button>
     <h1>Hey Hetanshi ❤️</h1>
     <p>
       This might not be the usual way people ask this…  
@@ -162,11 +152,22 @@ button {
       So I wanted to ask you in a language I enjoy…
       and with all my heart.
     </p>
-    <button onclick="gotoHuskyPage()">Next 🎁</button>
+    <h1>Will you be my Valentine? 💖</h1>
+    <button id="yes" onclick="gotoMemePage()">YES 💕</button>
+    <button id="no" onmouseover="moveNo()">No 😢</button>
   </div>
 </div>
 
-<!-- PAGE 3: HUSKY -->
+<!-- PAGE 2: Meme + "yay I knew you'd say yes" -->
+<div id="page2" class="page">
+  <img class="meme" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemxpZGtiejNmYXl2N3ZidDlha2JzYWNyeG9wam44bjAxbDlqNG9qZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rjkJD1v80CjYs/giphy.gif">
+  <div class="card">
+    <h1>Yay! I knew you'd say yes 😍</h1>
+    <button onclick="gotoHuskyPage()">I have a gift for you 🎁</button>
+  </div>
+</div>
+
+<!-- PAGE 3: Husky + Flowers -->
 <div id="page3" class="page">
   <div class="card">
     <h1>Flowers for you 🌸</h1>
@@ -176,10 +177,10 @@ button {
   </div>
 </div>
 
-<!-- PAGE 4: LANTERNS -->
+<!-- PAGE 4: Tangled Lanterns -->
 <div id="page4" class="page">
   <div id="water"></div>
-  <div class="card" style="background: rgba(0,0,0,0.5); top: 10%;">
+  <div class="card" style="background: rgba(0,0,0,0.5); top: 10%; position: relative;">
     <h1>See you tomorrow…</h1>
     <p>Let's make up for all the nice and sunny days we missed together 🌟</p>
   </div>
@@ -187,6 +188,12 @@ button {
 </div>
 
 <script>
+function startMusic() {
+  const music = document.getElementById("music");
+  music.play().catch(() => alert("Tap again to start music 🎵"));
+  document.getElementById("musicBtn").style.display = "none";
+}
+
 function moveNo() {
   const no = document.getElementById("no");
   no.style.left = Math.random() * 80 + "vw";
@@ -198,7 +205,7 @@ function gotoMemePage() {
   document.getElementById("page1").style.display = "none";
   document.getElementById("page2").style.display = "flex";
 
-  // Confetti for first page YES
+  // Confetti for YES
   const duration = 5000;
   const end = Date.now() + duration;
   (function frame() {
@@ -246,3 +253,4 @@ function gotoLanternPage() {
 </script>
 </body>
 </html>
+  
