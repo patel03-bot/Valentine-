@@ -62,7 +62,7 @@ button {
   overflow: hidden;
 }
 
-/* LANternS page */
+/* LANTERNS PAGE */
 .lantern {
   position: absolute;
   width: 30px;
@@ -95,8 +95,9 @@ img { margin: 10px; border-radius: 15px; }
   position: fixed;
   width: 420px;
   max-width: 90vw;
-  z-index: 20;
 }
+
+h1, p { margin: 15px 0; }
 </style>
 </head>
 
@@ -174,9 +175,10 @@ function celebrate() {
   const meme = document.createElement("img");
   meme.src = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemxpZGtiejNmYXl2N3ZidDlha2JzYWNyeG9wam44bjAxbDlqNG9qZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rjkJD1v80CjYs/giphy.gif";
   meme.className = "meme";
-  meme.style.top = "50%";
+  meme.style.top = "65%";           // LOWER to avoid covering text
   meme.style.left = "50%";
   meme.style.transform = "translate(-50%, -50%)";
+  meme.style.zIndex = "1";          // BEHIND the card
   document.body.appendChild(meme);
 
   const duration = 7000;
