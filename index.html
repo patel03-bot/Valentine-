@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hetanshi ❤️ Kush</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+    .card {
+      background: rgba(0,0,0,0.25);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      animation: fadeIn 2s ease;
+    }
+    h1 {
+      font-size: 2.5em;
+    }
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+    button {
+      margin: 15px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+    #no {
+      background-color: #444;
+      color: white;
+      position: absolute;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_1e8c0b2e93.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="card">
+    <h1>Hey Hetanshi ❤️</h1>
+    <p>
+      This might not be the usual way people ask this…  
+      but you know me — I like doing things a little differently.
+      <br><br>
+      From every laugh, every moment, and even our iconic  
+      <strong>“hi how are you”</strong> —  
+      you’ve become someone really special to me.
+      <br><br>
+      So I wanted to ask you in a language I enjoy…
+      and with all my heart.
+    </p>
+    <h1>Will you be my Valentine? 💖</h1>
+    <button id="yes" onclick="yesClicked()">YES 💕</button>
+    <button id="no" onmouseover="moveNo()">No 😢</button>
+  </div>
+
+  <script>
+    function yesClicked() {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          flex-direction:column;
+          background:linear-gradient(135deg,#ff758c,#ff7eb3);
+          color:white;
+          text-align:center;
+          font-family:Arial;
+        ">
+          <h1>You just made me the happiest person ❤️</h1>
+          <p>
+            Happy Valentine’s Day, Hetanshi.
+            <br><br>
+            With love,<br>
+            <strong>Kush</strong>
+          </p>
+        </div>
+      `;
+    }
+
+    function moveNo() {
+      const no = document.getElementById("no");
+      no.style.top = Math.random() * 80 + "vh";
+      no.style.left = Math.random() * 80 + "vw";
+    }
+  </script>
+
+</body>
+</html>
