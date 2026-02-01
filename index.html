@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Hetanshi ❤️ Kush</title>
 
+<!-- Confetti & Fireworks -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <style>
-body {
+html, body {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+}
+
+.center {
+  position: absolute;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-  color: white;
-  text-align: center;
 }
 
 .card {
   background: rgba(0,0,0,0.25);
   padding: 40px;
   border-radius: 20px;
-  max-width: 600px;
+  max-width: 650px;
+  text-align: center;
   z-index: 5;
-  animation: fadeIn 2s ease;
 }
 
-h1 { font-size: 2.5em; }
-p { font-size: 1.2em; line-height: 1.6; }
-
 button {
-  margin: 15px;
   padding: 15px 30px;
+  margin: 12px;
   font-size: 1.2em;
   border: none;
   border-radius: 30px;
@@ -47,31 +52,30 @@ button {
   margin-bottom: 20px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* EFFECTS */
-.confetti, .firework, .lantern {
+/* Lanterns */
+.lantern {
   position: fixed;
-  font-size: 30px;
-  animation: float 4s linear forwards;
-  pointer-events: none;
+  bottom: -100px;
+  width: 40px;
+  height: 60px;
+  background: radial-gradient(circle at 50% 30%, #fff6c7, #ff9f1c);
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255,200,120,0.8);
+  animation: rise 12s linear infinite;
+  opacity: 0.9;
 }
 
-@keyframes float {
+@keyframes rise {
   from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
+  to { transform: translateY(-130vh); opacity: 0; }
 }
 
+/* Meme */
 .meme {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 250px;
-  border-radius: 15px;
-  z-index: 10;
+  width: 420px;
+  max-width: 90vw;
+  z-index: 20;
 }
 </style>
 </head>
@@ -79,29 +83,31 @@ button {
 <body>
 
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1a4f8b61.mp3" type="audio/mp3">
+  <source src="https://cdn.pixabay.com/download/audio/2023/02/28/audio_6c6a5f19e0.mp3" type="audio/mp3">
 </audio>
 
-<div class="card">
-  <button id="musicBtn" onclick="startMusic()">Tap to start music ❤️</button>
+<div class="center" id="proposal">
+  <div class="card">
+    <button id="musicBtn" onclick="startMusic()">Tap to start music ❤️</button>
 
-  <h1>Hey Hetanshi ❤️</h1>
-  <p>
-    This might not be the usual way people ask this…  
-    but you know me — I like doing things a little differently.
-    <br><br>
-    From every laugh, every moment, and even our iconic  
-    <strong>“hi how are you”</strong>,  
-    you’ve become someone really special to me.
-    <br><br>
-    So I wanted to ask you in a language I enjoy…
-    and with all my heart.
-  </p>
+    <h1>Hey Hetanshi ❤️</h1>
+    <p>
+      This might not be the usual way people ask this…  
+      but you know me — I like doing things a little differently.
+      <br><br>
+      From every laugh, every moment, and even our iconic  
+      <strong>“hi how are you”</strong>,  
+      you’ve become someone really special to me.
+      <br><br>
+      So I wanted to ask you in a language I enjoy…
+      and with all my heart.
+    </p>
 
-  <h1>Will you be my Valentine? 💖</h1>
+    <h1>Will you be my Valentine? 💖</h1>
 
-  <button id="yes" onclick="yesClicked()">YES 💕</button>
-  <button id="no" onmouseover="moveNo()">No 😢</button>
+    <button id="yes" onclick="celebrate()">YES 💕</button>
+    <button id="no" onmouseover="moveNo()">No 😢</button>
+  </div>
 </div>
 
 <script>
@@ -110,54 +116,58 @@ function startMusic() {
   document.getElementById("musicBtn").style.display = "none";
 }
 
-function yesClicked() {
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex-direction:column;
-      background:linear-gradient(135deg,#ff758c,#ff7eb3);
-      color:white;
-      font-family:Arial;
-      text-align:center;
-      overflow:hidden;
-    ">
-      <h1>SHE SAID YES ❤️🔥</h1>
-      <p>Happy Valentine’s Day, Hetanshi<br><br>— Kush</p>
-    </div>
-  `;
-
-  // CONFETTI + FIREWORKS + LANTERNS
-  for (let i = 0; i < 150; i++) {
-    createEffect("🎉", "confetti");
-    createEffect("🎆", "firework");
-    createEffect("🏮", "lantern");
-  }
-
-  // MEME
-  const meme = document.createElement("img");
-  meme.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWk4a3d4a3I4eHk1dG9kbWQ1bXl3N3l3dzA3b2F4bWl2eHhzZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif";
-  meme.className = "meme";
-  document.body.appendChild(meme);
-}
-
-function createEffect(emoji, className) {
-  const el = document.createElement("div");
-  el.className = className;
-  el.innerHTML = emoji;
-  el.style.left = Math.random() * 100 + "vw";
-  el.style.top = "100vh";
-  el.style.fontSize = Math.random() * 30 + 20 + "px";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 4000);
-}
-
 function moveNo() {
   const no = document.getElementById("no");
-  no.style.top = Math.random() * 80 + "vh";
   no.style.left = Math.random() * 80 + "vw";
+  no.style.top = Math.random() * 80 + "vh";
+}
+
+function celebrate() {
+  document.getElementById("proposal").remove();
+
+  // CONFETTI BLAST
+  const duration = 5000;
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 6,
+      spread: 70,
+      origin: { x: Math.random(), y: Math.random() - 0.2 }
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+
+  // FIREWORKS
+  setInterval(() => {
+    confetti({
+      particleCount: 80,
+      spread: 360,
+      startVelocity: 40,
+      origin: {
+        x: Math.random(),
+        y: Math.random() * 0.5
+      }
+    });
+  }, 800);
+
+  // LANTERNS
+  for (let i = 0; i < 25; i++) {
+    const l = document.createElement("div");
+    l.className = "lantern";
+    l.style.left = Math.random() * 100 + "vw";
+    l.style.animationDelay = Math.random() * 5 + "s";
+    document.body.appendChild(l);
+  }
+
+  // MEME (BIG, CENTER)
+  const meme = document.createElement("img");
+  meme.src = "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif";
+  meme.className = "meme";
+  meme.style.top = "50%";
+  meme.style.left = "50%";
+  meme.style.transform = "translate(-50%, -50%)";
+  document.body.appendChild(meme);
 }
 </script>
 
