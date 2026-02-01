@@ -16,15 +16,14 @@ html, body {
 /* COMMON CARD STYLE */
 .card {
   background: rgba(0,0,0,0.25);
-  padding: 40px;
+  padding: 30px 40px;
   border-radius: 20px;
   max-width: 700px;
   text-align: center;
   margin: auto;
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   color: white;
   z-index: 10;
 }
@@ -53,6 +52,9 @@ button {
   height: 100vh; 
   background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #page3 { 
@@ -60,9 +62,29 @@ button {
   background: radial-gradient(circle at bottom, #000 0%, #111 80%);
   display: none;
   overflow: hidden;
+  position: relative;
 }
 
-/* LANTERNS PAGE */
+/* MEME IMAGE */
+.meme {
+  position: absolute;
+  width: 400px;
+  max-width: 90vw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* HUSKY IMAGE */
+.husky {
+  width: 250px;
+  max-width: 80vw;
+  margin-top: 20px;
+  border-radius: 20px;
+  z-index: 5;
+}
+
+/* LANTERN PAGE */
 .lantern {
   position: absolute;
   width: 30px;
@@ -89,18 +111,18 @@ button {
   filter: brightness(1.2);
 }
 
-img { margin: 10px; border-radius: 15px; }
-
-.meme {
-  position: fixed;
-  width: 420px;
-  max-width: 90vw;
+/* WATER REFLECTION */
+#water {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  z-index: 1;
+  filter: blur(4px);
 }
-
-h1, p { margin: 15px 0; }
 </style>
 </head>
-
 <body>
 
 <audio id="music" loop>
@@ -109,7 +131,8 @@ h1, p { margin: 15px 0; }
 
 <!-- PAGE 1: PROPOSAL -->
 <div id="page1">
-  <div class="card" id="proposal">
+  <img id="meme" class="meme" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemxpZGtiejNmYXl2N3ZidDlha2JzYWNyeG9wam44bjAxbDlqNG9qZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rjkJD1v80CjYs/giphy.gif">
+  <div class="card" id="proposal" style="top: 65%;">
     <button id="musicBtn" onclick="startMusic()">Tap to start music ❤️</button>
     <h1>Hey Hetanshi ❤️</h1>
     <p>
@@ -131,22 +154,19 @@ h1, p { margin: 15px 0; }
   </div>
 </div>
 
-<!-- PAGE 2: GIFTS -->
-<div id="page2">
+<!-- PAGE 2: HUSKY GIFT -->
+<div id="page2" style="display: none; display: flex; flex-direction: column; align-items: center; justify-content: center;">
   <div class="card">
     <h1>Flowers for you 🌸</h1>
     <p>For you 💖</p>
-    <div>
-      <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?fit=crop&w=300&q=80" width="150">
-      <img src="https://images.unsplash.com/photo-1603784973811-4d71d3602e1d?fit=crop&w=300&q=80" width="150">
-      <img src="https://images.unsplash.com/photo-1623056836411-122a3e3b6f88?fit=crop&w=300&q=80" width="150">
-    </div>
-    <button onclick="gotoLanternPage()">Next 🌌</button>
   </div>
+  <img class="husky" src="https://i.imgur.com/fQ7Z2Jg.png" alt="Husky with flowers">
+  <button onclick="gotoLanternPage()">Next 🌌</button>
 </div>
 
 <!-- PAGE 3: LANTERN NIGHT -->
 <div id="page3">
+  <div id="water"></div>
   <div class="card" style="background: rgba(0,0,0,0.5); top: 10%;">
     <h1>See you tomorrow…</h1>
     <p>Let's make up for all the nice and sunny days we missed together 🌟</p>
@@ -172,15 +192,6 @@ function celebrate() {
   proposal.innerHTML = "<h1>Yay! I knew you'd say yes 😍</h1><button onclick='gotoGiftPage()'>I have a gift for you 🎁</button>";
 
   // Confetti
-  const meme = document.createElement("img");
-  meme.src = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemxpZGtiejNmYXl2N3ZidDlha2JzYWNyeG9wam44bjAxbDlqNG9qZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/rjkJD1v80CjYs/giphy.gif";
-  meme.className = "meme";
-  meme.style.top = "65%";           // LOWER to avoid covering text
-  meme.style.left = "50%";
-  meme.style.transform = "translate(-50%, -50%)";
-  meme.style.zIndex = "1";          // BEHIND the card
-  document.body.appendChild(meme);
-
   const duration = 7000;
   const end = Date.now() + duration;
   (function frame() {
@@ -196,7 +207,10 @@ function celebrate() {
 
 function gotoGiftPage() {
   document.getElementById("page1").style.display = "none";
-  document.getElementById("page2").style.display = "block";
+  document.getElementById("page2").style.display = "flex";
+  // Remove meme after first page
+  const meme = document.getElementById("meme");
+  if (meme) meme.remove();
 }
 
 function gotoLanternPage() {
@@ -204,7 +218,7 @@ function gotoLanternPage() {
   const page3 = document.getElementById("page3");
   page3.style.display = "block";
 
-  // Glowing lanterns
+  // Lanterns with glow & flying up
   for (let i = 0; i < 30; i++) {
     const l = document.createElement("div");
     l.className = "lantern";
@@ -212,7 +226,17 @@ function gotoLanternPage() {
     l.style.animationDelay = Math.random() * 10 + "s";
     l.style.width = 20 + Math.random()*20 + "px";
     l.style.height = 30 + Math.random()*30 + "px";
+    // Add soft glow
+    l.style.boxShadow = `0 0 ${20 + Math.random()*20}px rgba(255,200,150,0.7)`;
     page3.appendChild(l);
+
+    // Create reflection
+    const refl = l.cloneNode(true);
+    refl.style.transform = "scaleY(-1)";
+    refl.style.opacity = "0.25";
+    refl.style.filter = "blur(2px)";
+    refl.style.top = "50%";
+    page3.appendChild(refl);
   }
 }
 </script>
