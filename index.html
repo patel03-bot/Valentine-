@@ -1,117 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Hetanshi ❤️ Kush</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Arial', sans-serif;
-      overflow: hidden;
-      color: white;
-      text-align: center;
-    }
-    .card {
-      background: rgba(0,0,0,0.25);
-      padding: 40px;
-      border-radius: 20px;
-      max-width: 600px;
-      animation: fadeIn 2s ease;
-    }
-    h1 {
-      font-size: 2.5em;
-    }
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
-    }
-    button {
-      margin: 15px;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    #yes {
-      background-color: #ff4d6d;
-      color: white;
-    }
-    #no {
-      background-color: #444;
-      color: white;
-      position: absolute;
-    }
-    button:hover {
-      transform: scale(1.1);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Hetanshi ❤️ Kush</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.card {
+  background: rgba(0,0,0,0.25);
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 600px;
+  z-index: 5;
+  animation: fadeIn 2s ease;
+}
+
+h1 { font-size: 2.5em; }
+p { font-size: 1.2em; line-height: 1.6; }
+
+button {
+  margin: 15px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#yes { background: #ff4d6d; color: white; }
+#no { background: #444; color: white; position: absolute; }
+#musicBtn {
+  background: white;
+  color: #ff4d6d;
+  margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* EFFECTS */
+.confetti, .firework, .lantern {
+  position: fixed;
+  font-size: 30px;
+  animation: float 4s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
+}
+
+.meme {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 250px;
+  border-radius: 15px;
+  z-index: 10;
+}
+</style>
 </head>
+
 <body>
 
-  <audio autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/30/audio_1e8c0b2e93.mp3" type="audio/mp3">
-  </audio>
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c1a4f8b61.mp3" type="audio/mp3">
+</audio>
 
-  <div class="card">
-    <h1>Hey Hetanshi ❤️</h1>
-    <p>
-      This might not be the usual way people ask this…  
-      but you know me — I like doing things a little differently.
-      <br><br>
-      From every laugh, every moment, and even our iconic  
-      <strong>“hi how are you”</strong> —  
-      you’ve become someone really special to me.
-      <br><br>
-      So I wanted to ask you in a language I enjoy…
-      and with all my heart.
-    </p>
-    <h1>Will you be my Valentine? 💖</h1>
-    <button id="yes" onclick="yesClicked()">YES 💕</button>
-    <button id="no" onmouseover="moveNo()">No 😢</button>
-  </div>
+<div class="card">
+  <button id="musicBtn" onclick="startMusic()">Tap to start music ❤️</button>
 
-  <script>
-    function yesClicked() {
-      document.body.innerHTML = `
-        <div style="
-          height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          flex-direction:column;
-          background:linear-gradient(135deg,#ff758c,#ff7eb3);
-          color:white;
-          text-align:center;
-          font-family:Arial;
-        ">
-          <h1>You just made me the happiest person ❤️</h1>
-          <p>
-            Happy Valentine’s Day, Hetanshi.
-            <br><br>
-            With love,<br>
-            <strong>Kush</strong>
-          </p>
-        </div>
-      `;
-    }
+  <h1>Hey Hetanshi ❤️</h1>
+  <p>
+    This might not be the usual way people ask this…  
+    but you know me — I like doing things a little differently.
+    <br><br>
+    From every laugh, every moment, and even our iconic  
+    <strong>“hi how are you”</strong>,  
+    you’ve become someone really special to me.
+    <br><br>
+    So I wanted to ask you in a language I enjoy…
+    and with all my heart.
+  </p>
 
-    function moveNo() {
-      const no = document.getElementById("no");
-      no.style.top = Math.random() * 80 + "vh";
-      no.style.left = Math.random() * 80 + "vw";
-    }
-  </script>
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <button id="yes" onclick="yesClicked()">YES 💕</button>
+  <button id="no" onmouseover="moveNo()">No 😢</button>
+</div>
+
+<script>
+function startMusic() {
+  document.getElementById("music").play();
+  document.getElementById("musicBtn").style.display = "none";
+}
+
+function yesClicked() {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      background:linear-gradient(135deg,#ff758c,#ff7eb3);
+      color:white;
+      font-family:Arial;
+      text-align:center;
+      overflow:hidden;
+    ">
+      <h1>SHE SAID YES ❤️🔥</h1>
+      <p>Happy Valentine’s Day, Hetanshi<br><br>— Kush</p>
+    </div>
+  `;
+
+  // CONFETTI + FIREWORKS + LANTERNS
+  for (let i = 0; i < 150; i++) {
+    createEffect("🎉", "confetti");
+    createEffect("🎆", "firework");
+    createEffect("🏮", "lantern");
+  }
+
+  // MEME
+  const meme = document.createElement("img");
+  meme.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWk4a3d4a3I4eHk1dG9kbWQ1bXl3N3l3dzA3b2F4bWl2eHhzZSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif";
+  meme.className = "meme";
+  document.body.appendChild(meme);
+}
+
+function createEffect(emoji, className) {
+  const el = document.createElement("div");
+  el.className = className;
+  el.innerHTML = emoji;
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.top = "100vh";
+  el.style.fontSize = Math.random() * 30 + 20 + "px";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+function moveNo() {
+  const no = document.getElementById("no");
+  no.style.top = Math.random() * 80 + "vh";
+  no.style.left = Math.random() * 80 + "vw";
+}
+</script>
 
 </body>
 </html>
